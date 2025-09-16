@@ -1,7 +1,8 @@
 package com.research_assistant;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Value;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -25,10 +26,10 @@ public class ResearchService {
 
 
     public String processContent(ResearchRequest request) {
-        // Build the prompt
+        // Build prompt
         String prompt = buildPrompt(request);
 
-        // Query the AI Model API
+        // Query AI Model API
         Map<String, Object> requestBody = Map.of(
                 "contents", new Object[] {
                         Map.of("parts", new Object[]{
@@ -44,7 +45,7 @@ public class ResearchService {
                 .bodyToMono(String.class)
                 .block();
 
-        // Parse the response
+        // Parse response
         // Return response
 
         return extractTextFromResponse(response);
